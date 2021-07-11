@@ -1,7 +1,7 @@
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 cmake_minimum_required(VERSION 3.7.2)
-project("Crispy Doom" VERSION 5.10.1 LANGUAGES C)
+project("Crispy Tesla Doom" VERSION 5.10.1 LANGUAGES C)
 
 # Autotools variables
 set(top_srcdir ${CMAKE_CURRENT_SOURCE_DIR})
@@ -12,7 +12,7 @@ set(PACKAGE_NAME "${PROJECT_NAME}")
 set(PACKAGE_TARNAME "crispy-doom")
 set(PACKAGE_VERSION "${PROJECT_VERSION}")
 set(PACKAGE_STRING "${PROJECT_NAME} ${PROJECT_VERSION}")
-set(PACKAGE_BUGREPORT "https://github.com/fabiangreffrath/crispy-doom/issues")
+set(PACKAGE_BUGREPORT "http://github.com/scramble45/crispy_tesla_doomissues")
 
 string(REGEX REPLACE " Doom$" "" PACKAGE_SHORTNAME "${PACKAGE_NAME}")
 set(PACKAGE_COPYRIGHT "Copyright (C) 1993-2021")
