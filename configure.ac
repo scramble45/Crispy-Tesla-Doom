@@ -1,14 +1,13 @@
-AC_INIT(Crispy Doom, 5.10.1,
-        fabian@greffrath.com, crispy-doom)
+AC_INIT(Crispy Tesla Doom, 5.10.1, crispy-doom)
 
 PACKAGE_SHORTNAME=${PACKAGE_NAME% Doom}
 PACKAGE_SHORTDESC="Limit-removing enhanced-resolution Doom source port"
 PACKAGE_COPYRIGHT="Copyright (C) 1993-2021"
 PACKAGE_LICENSE="GNU General Public License, version 2"
-PACKAGE_MAINTAINER="Fabian Greffrath"
-PACKAGE_URL="http://fabiangreffrath.github.io/crispy-doom"
-PACKAGE_RDNS="io.github.fabiangreffrath"
-PACKAGE_BUGREPORT="https://github.com/fabiangreffrath/crispy-doom/issues"
+PACKAGE_MAINTAINER="Rowan Hamilton"
+PACKAGE_URL="http://github.com/scramble45/crispy_tesla_doom"
+PACKAGE_RDNS=""
+PACKAGE_BUGREPORT="http://github.com/scramble45/crispy_tesla_doom/issues"
 
 AC_CONFIG_AUX_DIR(autotools)
 AC_CANONICAL_HOST
@@ -20,7 +19,7 @@ AC_PROG_CC
 AC_PROG_RANLIB
 AC_CHECK_PROG(HAVE_PYTHON, python3, true, false)
 
-OPT_LEVEL=2
+OPT_LEVEL=3
 
 # If this is gcc, we have some options we'd like to turn on.  Turn on 
 # optimisation and debugging symbols.
@@ -31,9 +30,9 @@ then
         CFLAGS="-O$OPT_LEVEL -g $WARNINGS $orig_CFLAGS"
 fi
 
-PKG_CHECK_MODULES(SDL, [sdl2 >= 2.0.7])
-PKG_CHECK_MODULES(SDLMIXER, [SDL2_mixer >= 2.0.2])
-PKG_CHECK_MODULES(SDLNET, [SDL2_net >= 2.0.0])
+# PKG_CHECK_MODULES(SDL, [sdl2 >= 2.0.7])
+# PKG_CHECK_MODULES(SDLMIXER, [SDL2_mixer >= 2.0.2])
+# PKG_CHECK_MODULES(SDLNET, [SDL2_net >= 2.0.0])
 
 # Check for bash-completion.
 AC_ARG_ENABLE([bash-completion],
@@ -143,8 +142,10 @@ AS_IF([test "x$enable_truecolor" = "xyes"], [
 
 # TODO: We currently link everything against libraries that don't need it.
 # Use the specific library CFLAGS/LIBS variables instead of setting them here.
-CFLAGS="$CFLAGS $SDL_CFLAGS ${SAMPLERATE_CFLAGS:-} ${PNG_CFLAGS:-} ${LIBZ_CFLAGS:-}"
-LDFLAGS="$LDFLAGS $SDL_LIBS ${SAMPLERATE_LIBS:-} ${PNG_LIBS:-} ${LIBZ_LIBS:-}"
+EMFLAGS="-gsource-map -s INVOKE_RUN=1 -s USE_SDL=2 -s USE_SDL_MIXER=2 -s LEGACY_GL_EMULATION=0 -s USE_SDL_NET=2 -s ASSERTIONS=0 -s WASM=1 -s ALLOW_MEMORY_GROWTH=0 -s FORCE_FILESYSTEM=1 -s EXTRA_EXPORTED_RUNTIME_METHODS=[['FS','ccall']] -s SAFE_HEAP=1 -s EXIT_RUNTIME=1 -s STACK_OVERFLOW_CHECK=1 -s PROXY_POSIX_SOCKETS=0 -s USE_PTHREADS=0 -s PROXY_TO_PTHREAD=0 -s TOTAL_MEMORY=64MB -s ERROR_ON_UNDEFINED_SYMBOLS=0 -s ASYNCIFY -O3 --source-map-base /"
+
+CFLAGS="$CFLAGS $SDL_CFLAGS ${SAMPLERATE_CFLAGS:-} ${PNG_CFLAGS:-} $EMFLAGS"
+LDFLAGS="$LDFLAGS $SDL_LIBS ${SAMPLERATE_LIBS:-} ${PNG_LIBS:-} $EMFLAGS -ldoom.js"
 AC_CHECK_LIB(m, log)
 
 # [crispy] use stdlib's qsort() function for sorting the vissprites[] array
@@ -210,6 +211,10 @@ AC_SUBST(SDLMIXER_LIBS)
 
 AC_SUBST(SDLNET_CFLAGS)
 AC_SUBST(SDLNET_LIBS)
+AC_SUBST(SDL_LIBS)
+AC_SUBST(SDL_CFLAGS)
+EXEEXT=".html"
+AC_SUBST(EXEEXT)
 
 AC_SUBST(ac_aux_dir)
 
@@ -227,40 +232,14 @@ AC_DEFUN([AC_DATAROOTDIR_CHECKED])
 
 AC_OUTPUT([
 Makefile
-man/Makefile
-man/bash-completion/Makefile
-man/bash-completion/doom.template
-man/bash-completion/heretic.template
-man/bash-completion/hexen.template
-man/bash-completion/strife.template
-midiproc/Makefile
 opl/Makefile
 opl/examples/Makefile
-pcsound/Makefile
-pkg/Makefile
-pkg/config.make
-pkg/osx/Info.plist
-rpm.spec
 data/Makefile
 src/Makefile
-src/Doom.metainfo.xml
-src/Doom.desktop
-src/Doom_Screensaver.desktop
 src/doom/Makefile
-src/Heretic.metainfo.xml
-src/Heretic.desktop
-src/heretic/Makefile
-src/Hexen.metainfo.xml
-src/Hexen.desktop
-src/hexen/Makefile
 src/resource.rc
 src/setup-res.rc
 src/setup/Makefile
-src/setup/Setup.desktop
-src/setup/setup-manifest.xml
-src/Strife.metainfo.xml
-src/Strife.desktop
-src/strife/Makefile
 textscreen/Makefile
 textscreen/examples/Makefile
 textscreen/fonts/Makefile
