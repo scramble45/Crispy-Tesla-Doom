@@ -9,13 +9,11 @@ This is a [Crispy Doom][1] WebAssembly port using [Emscripten][2]
 Please have the latest toolchain installed or one that works to compile this. You will want to have a wired XBox one controller connected to your vehicle.
 
 ## Compiling
-
 ```
 ./scripts/clean.sh
 ./scripts/build.sh
 ```
 ## Running
-
 Copy a game version of [doom1.wad][3] to [./src][5] (make sure it has the name doom1.wad) else modify the [src/index.html][4] commonArgs. SIGIL is also compatible if you pass in the `-file` flag.
 
 Then:
