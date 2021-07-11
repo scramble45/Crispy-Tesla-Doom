@@ -26,10 +26,10 @@ static crispy_t crispy_s = {
 	0,
 	.extautomap = 1,
 	.extsaveg = 1,
-	.hires = 1,
+	.hires = 0,
 	.smoothscaling = 1,
 	.soundfix = 1,
-	.widescreen = 3,
+	.widescreen = 2,
 	.coloredhud = 3,
 	.uncapped = 1,
 #ifdef CRISPY_TRUECOLOR

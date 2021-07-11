@@ -6,13 +6,13 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta property="title" content="DOOM">
 
-  <link href="https://fonts.googleapis.com/css?family=Teko&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
   <title>DOOM</title>
   <style>
     html,
     body {
-      font-family: 'Teko', sans-serif;
-      font-size: 200%;
+      font-family: 'Anton', sans-serif;
+      font-size: 120%;
       width: 100%;
       height: 100%;
       margin: 0;
@@ -24,13 +24,12 @@
       color: white;
     }
 
-    /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
     canvas {
       border: 0px none;
       image-rendering: pixelated;
-      width: 160vh;
-      height: 96vh;
-      margin-top: -20px;
+      width: 170vh;
+      height: 97vh;
+      margin-top: -19px;
     }
 
     #container {
@@ -67,7 +66,7 @@
       border-left: 5px solid transparent;
       border-right: 5px solid transparent;
       border-bottom: 5px solid transparent;
-      border-top: 5px solid hsl(0, 100%, 50%);
+      border-top: 5px solid hsl(0, 0%, 100%);
 
       border-radius: 100%;
       background-color: transparent;
@@ -79,7 +78,7 @@
       margin-top: 30px;
       margin-left: 20px;
       font-weight: bold;
-      color: hsl(0, 100%, 50%);
+      color: hsl(0, 0%, 100%);
     }
 
     #progress {
@@ -89,11 +88,11 @@
 
     progress::-moz-progress-bar,
     progress::-webkit-progress-value {
-      background: hsl(0, 100%, 50%);
+      background: hsla(0, 0%, 100%, 0.74);
     }
 
     progress {
-      color: hsl(0, 100%, 50%);
+      color: hsl(0, 0%, 100%);
     }
 
     @-webkit-keyframes rotation {
@@ -167,7 +166,6 @@
       preRun: () => {
         Module.FS.createPreloadedFile("", "doom1.wad", "doom1.wad", true, true);
         Module.FS.createPreloadedFile("", "default.cfg", "default.cfg", true, true);
-        // Module.FS.createPreloadedFile("", "crispy-doom.cfg", "crispy-doom.cfg", true, true);
       },
       postRun: [],
       noInitialRun: true,
@@ -309,7 +307,7 @@
       totalDependencies: 0,
       monitorRunDependencies: function (left) {
         this.totalDependencies = Math.max(this.totalDependencies, left);
-        Module.setStatus(left ? 'Loading Dependencies... (' + (this.totalDependencies - left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
+        Module.setStatus(left ? 'Loading... (' + (this.totalDependencies - left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
         spinnerElement.style.display = 'none';
       }
     };
