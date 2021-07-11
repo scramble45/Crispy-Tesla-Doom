@@ -909,6 +909,7 @@ void S_StartMusic(int m_id)
 
 void S_ChangeMusic(int musicnum, int looping)
 {
+    return; // for now..
     musicinfo_t *music = NULL;
     char namebuf[9];
     void *handle;

@@ -267,7 +267,7 @@ void I_InitSound(boolean use_sfx_prefix)
     {
 	const char *driver_name = SDL_GetCurrentAudioDriver();
 
-	fprintf(stderr, "I_InitSound: SDL audio driver is %s\n", driver_name ? driver_name : "none");
+	// fprintf(stderr, "I_InitSound: SDL audio driver is %s\n", driver_name ? driver_name : "none");
     }
 }
 

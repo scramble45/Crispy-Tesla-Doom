@@ -452,6 +452,12 @@ static default_t	doom_defaults_list[] =
     CONFIG_VARIABLE_KEY(key_speed),
 
     //!
+    // Keyboard key to go/exit fullscreen
+    //
+
+    CONFIG_VARIABLE_KEY(key_fullscreen),
+
+    //!
     // If non-zero, mouse input is enabled.  If zero, mouse input is
     // disabled.
     //

@@ -1,22 +1,9 @@
 
-SUBDIRS = doom heretic setup # hexen strife
+SUBDIRS = doom
 
 execgamesdir = ${bindir}
 
-execgames_PROGRAMS = @PROGRAM_PREFIX@doom     \
-                     @PROGRAM_PREFIX@heretic  \
-                     @PROGRAM_PREFIX@server
-EXTRA_PROGRAMS =     @PROGRAM_PREFIX@hexen    \
-                     @PROGRAM_PREFIX@strife
-
-noinst_PROGRAMS = @PROGRAM_PREFIX@setup
-
-SETUP_BINARIES = @PROGRAM_PREFIX@doom-setup$(EXEEXT)    \
-                 @PROGRAM_PREFIX@heretic-setup$(EXEEXT)
-#                @PROGRAM_PREFIX@hexen-setup$(EXEEXT)   \
-#                @PROGRAM_PREFIX@strife-setup$(EXEEXT)
-
-execgames_SCRIPTS = $(SETUP_BINARIES)
+execgames_PROGRAMS = @PROGRAM_PREFIX@doom
 
 AM_CFLAGS = -I$(top_srcdir)/textscreen            \
             -I$(top_srcdir)/opl                   \
@@ -31,28 +18,6 @@ i_main.c                                   \
 i_system.c           i_system.h            \
 m_argv.c             m_argv.h              \
 m_misc.c             m_misc.h
-
-# Dedicated server (chocolate-server):
-
-DEDSERV_FILES=\
-d_dedicated.c                              \
-d_iwad.c             d_iwad.h              \
-d_mode.c             d_mode.h              \
-deh_str.c            deh_str.h             \
-i_timer.c            i_timer.h             \
-m_config.c           m_config.h            \
-net_common.c         net_common.h          \
-net_dedicated.c      net_dedicated.h       \
-net_io.c             net_io.h              \
-net_packet.c         net_packet.h          \
-net_sdl.c            net_sdl.h             \
-net_query.c          net_query.h           \
-net_server.c         net_server.h          \
-net_structrw.c       net_structrw.h        \
-z_native.c           z_zone.h
-
-@PROGRAM_PREFIX@server_SOURCES=$(COMMON_SOURCE_FILES) $(DEDSERV_FILES)
-@PROGRAM_PREFIX@server_LDADD = @LDFLAGS@ @SDLNET_LIBS@
 
 # Source files used by the game binaries (chocolate-doom, etc.)
 
@@ -149,124 +114,16 @@ endif
 
 @PROGRAM_PREFIX@doom_LDADD = doom/libdoom.a $(EXTRA_LIBS)
 
-if HAVE_WINDRES
-@PROGRAM_PREFIX@heretic_SOURCES=$(SOURCE_FILES_WITH_DEH) resource.rc
-else
-@PROGRAM_PREFIX@heretic_SOURCES=$(SOURCE_FILES_WITH_DEH)
-endif
-
-@PROGRAM_PREFIX@heretic_LDADD = heretic/libheretic.a $(EXTRA_LIBS)
-
-if HAVE_WINDRES
-@PROGRAM_PREFIX@hexen_SOURCES=$(SOURCE_FILES) resource.rc
-else
-@PROGRAM_PREFIX@hexen_SOURCES=$(SOURCE_FILES)
-endif
-
-@PROGRAM_PREFIX@hexen_LDADD = hexen/libhexen.a $(EXTRA_LIBS)
-
-if HAVE_WINDRES
-@PROGRAM_PREFIX@strife_SOURCES=$(SOURCE_FILES_WITH_DEH) resource.rc
-else
-@PROGRAM_PREFIX@strife_SOURCES=$(SOURCE_FILES_WITH_DEH)
-endif
-
-@PROGRAM_PREFIX@strife_LDADD = strife/libstrife.a $(EXTRA_LIBS)
-
-$(SETUP_BINARIES): @PROGRAM_PREFIX@setup$(EXEEXT)
-	cp @PROGRAM_PREFIX@setup$(EXEEXT) $@
-
 # Make "make" aware of convenience libraries in subdirectories
 
 doom/libdoom.a:
 	$(MAKE) -C doom
 
-heretic/libheretic.a:
-	$(MAKE) -C heretic
-
-hexen/libhexen.a:
-	$(MAKE) -C hexen
-
-strife/libstrife.a:
-	$(MAKE) -C strife
-
-# Source files needed for chocolate-setup:
-
-SETUP_FILES=                               \
-deh_str.c            deh_str.h             \
-d_mode.c             d_mode.h              \
-d_iwad.c             d_iwad.h              \
-i_timer.c            i_timer.h             \
-m_config.c           m_config.h            \
-m_controls.c         m_controls.h          \
-net_io.c             net_io.h              \
-net_packet.c         net_packet.h          \
-net_petname.c        net_petname.h         \
-net_sdl.c            net_sdl.h             \
-net_query.c          net_query.h           \
-net_structrw.c       net_structrw.h        \
-z_native.c           z_zone.h
-
-if HAVE_WINDRES
-@PROGRAM_PREFIX@setup_SOURCES=$(SETUP_FILES) $(COMMON_SOURCE_FILES) setup-res.rc
-else
-@PROGRAM_PREFIX@setup_SOURCES=$(SETUP_FILES) $(COMMON_SOURCE_FILES)
-endif
-@PROGRAM_PREFIX@setup_LDADD = setup/libsetup.a                             \
-                        $(top_builddir)/textscreen/libtextscreen.a   \
-                        @LDFLAGS@ @SDL_LIBS@ @SDLMIXER_LIBS@ @SDLNET_LIBS@
-
 EXTRA_DIST =                        \
         CMakeLists.txt              \
-        icon.c                      \
-        Doom_Screensaver.desktop.in \
-        manifest.xml
+        icon.c                      
 
-metainfodir = $(prefix)/share/metainfo
-metainfo_DATA =                             \
-        @PACKAGE_RDNS@.Doom.metainfo.xml    \
-        @PACKAGE_RDNS@.Heretic.metainfo.xml
-#       @PACKAGE_RDNS@.Hexen.metainfo.xml   \
-#       @PACKAGE_RDNS@.Strife.metainfo.xml
-
-@PACKAGE_RDNS@.Doom.metainfo.xml : Doom.metainfo.xml
-	cp Doom.metainfo.xml $@
-
-@PACKAGE_RDNS@.Heretic.metainfo.xml : Heretic.metainfo.xml
-	cp Heretic.metainfo.xml $@
-
-@PACKAGE_RDNS@.Hexen.metainfo.xml : Hexen.metainfo.xml
-	cp Hexen.metainfo.xml $@
-
-@PACKAGE_RDNS@.Strife.metainfo.xml : Strife.metainfo.xml
-	cp Strife.metainfo.xml $@
-
-appdir = $(prefix)/share/applications
-app_DATA =                                 \
-           @PACKAGE_RDNS@.Doom.desktop    \
-           @PACKAGE_RDNS@.Heretic.desktop
-#          @PACKAGE_RDNS@.Hexen.desktop   \
-#          @PACKAGE_RDNS@.Strife.desktop
-
-@PACKAGE_RDNS@.Doom.desktop : Doom.desktop
-	cp Doom.desktop $@
-
-@PACKAGE_RDNS@.Heretic.desktop : Heretic.desktop
-	cp Heretic.desktop $@
-
-@PACKAGE_RDNS@.Hexen.desktop : Hexen.desktop
-	cp Hexen.desktop $@
-
-@PACKAGE_RDNS@.Strife.desktop : Strife.desktop
-	cp Strife.desktop $@
-
-screensaverdir = $(prefix)/share/applications/screensavers
-screensaver_DATA = @PACKAGE_RDNS@.Doom_Screensaver.desktop
-
-@PACKAGE_RDNS@.Doom_Screensaver.desktop: Doom_Screensaver.desktop
-	cp Doom_Screensaver.desktop $@
-
-CLEANFILES = $(execgames_SCRIPTS) $(app_DATA) $(screensaver_DATA)
+CLEANFILES = $(execgames_SCRIPTS)
 
 .rc.o:
 	$(WINDRES) $< -o $@
@@ -287,4 +144,3 @@ MUS2MID_SRC_FILES = mus2mid.c memio.c z_native.c i_system.c m_argv.c m_misc.c
 mus2mid : $(MUS2MID_SRC_FILES)
 	$(CC) -DSTANDALONE -I$(top_builddir) $(CFLAGS) @LDFLAGS@ \
               $(MUS2MID_SRC_FILES) -o $@
-

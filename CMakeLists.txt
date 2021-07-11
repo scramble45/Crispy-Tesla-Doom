@@ -12,7 +12,7 @@ set(PACKAGE_NAME "${PROJECT_NAME}")
 set(PACKAGE_TARNAME "crispy-doom")
 set(PACKAGE_VERSION "${PROJECT_VERSION}")
 set(PACKAGE_STRING "${PROJECT_NAME} ${PROJECT_VERSION}")
-set(PACKAGE_BUGREPORT "http://github.com/scramble45/crispy_tesla_doomissues")
+set(PACKAGE_BUGREPORT "http://github.com/scramble45/crispy_tesla_doom/issues")
 
 string(REGEX REPLACE " Doom$" "" PACKAGE_SHORTNAME "${PACKAGE_NAME}")
 set(PACKAGE_COPYRIGHT "Copyright (C) 1993-2021")
@@ -61,7 +61,7 @@ string(CONCAT WINDOWS_RC_VERSION "${PROJECT_VERSION_MAJOR}, "
 string(TOLOWER "${PACKAGE_SHORTNAME}" PROGRAM_SPREFIX)
 
 # With a hyphen, used almost everywhere else.
-set(PROGRAM_PREFIX "${PROGRAM_SPREFIX}-")
+set("${PROGRAM_SPREFIX}-")
 
 configure_file(cmake/config.h.cin config.h)
 

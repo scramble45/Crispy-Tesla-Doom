@@ -35,6 +35,8 @@ extern int key_strafe;
 extern int key_speed;
 
 extern int key_jump;
+extern int key_fullscreen;
+
 extern int key_toggleautorun;
 extern int key_togglenovert;
  
