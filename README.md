@@ -33,8 +33,9 @@ Doom should start (local mode).
 
 Once the game is running you can redirect via YouTube to go fullscreen by clicking anywhere within the canvas.
 
-## Special Thanks,
-Special thanks to: [Cloudflare][4] for getting the ball rolling, and giving me a better foot hold to get a Crispy port working.
+## Special Thanks
+- [Cloudflare][4] for getting the ball rolling, and giving me a better foot hold to get a Crispy port working.
+- [Emscripten][0] and there coherent documentation/toolchain.
 
 ## License
 
