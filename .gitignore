@@ -51,6 +51,7 @@ STRIFE*.pcx
 .#*
 .*.swp
 .DS_store
+.wad
 
 # Ignore GNU Global tags and html files
 GPATH
