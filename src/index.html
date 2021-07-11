@@ -158,12 +158,8 @@
     });
 
     document.addEventListener('mousedown', e => {
-      goFullScreenYoutube();
-    });
-
-    function goFullScreenYoutube() {
       location.href = `https://www.youtube.com/redirect?q=${window.location.href}`;
-    }
+    });
 
     const commonArgs = ["-iwad", "doom1.wad", "-nomusic", "-window", "-nogui", "-config", "default.cfg"];
 

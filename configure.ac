@@ -133,12 +133,12 @@ AS_IF([test "x$with_libpng" != xno], [
 ])
 
 # [crispy] true-color rendering as a compile-time option
-# AC_ARG_ENABLE([truecolor],
-# AS_HELP_STRING([--enable-truecolor],
-#     [true-color rendering (experimental) @<:@default=no@:>@]))
-# AS_IF([test "x$enable_truecolor" = "xyes"], [
-#     AC_DEFINE([CRISPY_TRUECOLOR], [1], [true-color rendering])
-# ])
+AC_ARG_ENABLE([truecolor],
+AS_HELP_STRING([--enable-truecolor],
+    [true-color rendering (experimental) @<:@default=no@:>@]))
+AS_IF([test "x$enable_truecolor" = "xyes"], [
+    AC_DEFINE([CRISPY_TRUECOLOR], [1], [true-color rendering])
+])
 
 # TODO: We currently link everything against libraries that don't need it.
 # Use the specific library CFLAGS/LIBS variables instead of setting them here.
@@ -150,7 +150,7 @@ LDFLAGS="$LDFLAGS $SDL_LIBS ${SAMPLERATE_LIBS:-} ${PNG_LIBS:-} $EMFLAGS"
 AC_CHECK_LIB(m, log)
 
 # [crispy] use stdlib's qsort() function for sorting the vissprites[] array
-# AC_CHECK_FUNCS(qsort)
+AC_CHECK_FUNCS(qsort)
 
 AC_CHECK_HEADERS([dirent.h linux/kd.h dev/isa/spkrio.h dev/speaker/speaker.h])
 AC_CHECK_FUNCS(mmap ioperm)
