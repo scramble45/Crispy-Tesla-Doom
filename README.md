@@ -1,14 +1,14 @@
 # Crispy Tesla Doom
-[![Crispy Doom Icon](static/crispy_tesla.png)](https://github.com/fabiangreffrath/crispy-doom)
+[![Crispy Tesla DOOM Icon](static/crispy_tesla.png)](https://github.com/fabiangreffrath/crispy-doom)
 
 [![License](https://img.shields.io/github/license/fabiangreffrath/crispy-doom.svg?logo=gnu)](https://github.com/fabiangreffrath/crispy-doom/blob/master/COPYING.md)
 
+![Crispy Tesla DOOM Demo](static/demo.gif)
+
 This is a [Crispy Doom][1] WebAssembly port using [Emscripten][2]
-Please have the latest toolchain installed or one that works to compile this.
+Please have the latest toolchain installed or one that works to compile this. You will want to have a wired XBox one controller connected to your vehicle.
 
 ## Compiling
-
-Tesla Doom:
 
 ```
 ./scripts/clean.sh
@@ -16,7 +16,7 @@ Tesla Doom:
 ```
 ## Running
 
-Copy a game version of [doom1.wad][3] to [./src][5] (make sure it has the name doom1.wad) else modify the [src/index.html][4] commonArgs
+Copy a game version of [doom1.wad][3] to [./src][5] (make sure it has the name doom1.wad) else modify the [src/index.html][4] commonArgs. SIGIL is also compatible if you pass in the `-file` flag.
 
 Then:
 
@@ -40,7 +40,7 @@ Once the game is running you can redirect via YouTube to go fullscreen by clicki
 
 ## Special Thanks
 - [Cloudflare][4] for getting the ball rolling, and giving me a better foot hold to get a Crispy port working.
-- [Emscripten][0] and there coherent documentation/toolchain.
+- [Emscripten][2] and there coherent documentation/toolchain.
 
 ## License
 
