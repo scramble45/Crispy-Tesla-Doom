@@ -29,10 +29,13 @@ static crispy_t crispy_s = {
 	.hires = 1,
 	.smoothscaling = 1,
 	.soundfix = 1,
+	.widescreen = 3,
+	.coloredhud = 3,
+	.uncapped = 1,
 #ifdef CRISPY_TRUECOLOR
 	.truecolor = 1,
 #endif
-	.vsync = 1,
+	.vsync = 0,
 };
 crispy_t *const crispy = &crispy_s;
 
