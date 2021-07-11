@@ -573,8 +573,7 @@ void D_DoomLoop (void)
     }
 
     // [crispy] no need to write a demo header in demo continue mode
-    if (demorecording && gameaction != ga_playdemo)
-	G_BeginRecording ();
+    if (demorecording) G_BeginRecording();
 
     printf("Running emscripten_set_main_loop()\n");
     emscripten_set_main_loop(D_RunFrame, 0, 0);
@@ -599,10 +598,10 @@ void D_DoomLoop (void)
         wipegamestate = gamestate;
     }
 
-    while (1)
-    {
-        D_RunFrame();
-    }
+    // while (1)
+    // {
+    //     D_RunFrame();
+    // }
 }
 
 

@@ -18,6 +18,8 @@
 // 	format or DeePBSP format and/or LINEDEFS and THINGS lumps in Hexen format
 //
 
+#include <emscripten.h>
+
 #include "m_bbox.h"
 #include "p_local.h"
 #include "i_swap.h"
@@ -27,9 +29,9 @@
 
 // [crispy] support maps with compressed ZDBSP nodes
 #include "config.h"
-#ifdef HAVE_LIBZ
+// #ifdef HAVE_LIBZ
 #include <zlib.h>
-#endif
+// #endif
 
 #include "p_extnodes.h"
 
@@ -77,7 +79,7 @@ mapformat_t P_CheckMapFormat (int lumpnum)
 	format |= MFMT_ZDBSPZ;
     }
     else
-	fprintf(stderr, "BSP");
+	// fprintf(stderr, "BSP");
 
     if (nodes)
 	W_ReleaseLumpNum(b);

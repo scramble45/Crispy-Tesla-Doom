@@ -19,6 +19,7 @@
 
 
 #include "crispy.h"
+#include <emscripten.h>
 
 // [crispy] "regular" config variables
 static crispy_t crispy_s = {
