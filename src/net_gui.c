@@ -34,6 +34,7 @@
 #include "net_gui.h"
 #include "net_query.h"
 #include "net_server.h"
+#include <emscripten/websocket.h>
 
 #include "textscreen.h"
 

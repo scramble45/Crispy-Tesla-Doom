@@ -16,7 +16,7 @@
 //
 
 
-
+#include <emscripten/emscripten.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -260,7 +260,8 @@ void I_Quit (void)
 
     SDL_Quit();
 
-    exit(0);
+    emscripten_cancel_main_loop();
+    emscripten_force_exit(0);
 }
 
 

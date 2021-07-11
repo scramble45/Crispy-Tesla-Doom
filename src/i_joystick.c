@@ -19,6 +19,8 @@
 #include "SDL.h"
 #include "SDL_joystick.h"
 
+#include <emscripten.h>
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -42,7 +44,7 @@ static SDL_Joystick *joystick = NULL;
 
 // Standard default.cfg Joystick enable/disable
 
-static int usejoystick = 0;
+static int usejoystick = 1;
 
 // SDL GUID and index of the joystick to use.
 static char *joystick_guid = "";
@@ -51,7 +53,7 @@ static int joystick_index = -1;
 // Which joystick axis to use for horizontal movement, and whether to
 // invert the direction:
 
-static int joystick_x_axis = 0;
+static int joystick_x_axis = 2;
 static int joystick_x_invert = 0;
 
 // Which joystick axis to use for vertical movement, and whether to
@@ -62,8 +64,8 @@ static int joystick_y_invert = 0;
 
 // Which joystick axis to use for strafing?
 
-static int joystick_strafe_axis = -1;
-static int joystick_strafe_invert = 0;
+static int joystick_strafe_axis = 0;
+static int joystick_strafe_invert = -1; // orginally 0
 
 // Which joystick axis to use for looking?
 
@@ -76,6 +78,7 @@ static int joystick_physical_buttons[NUM_VIRTUAL_BUTTONS] = {
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 };
 
+EMSCRIPTEN_KEEPALIVE
 void I_ShutdownJoystick(void)
 {
     if (joystick != NULL)
@@ -144,6 +147,7 @@ static int DeviceIndex(void)
     return -1;
 }
 
+EMSCRIPTEN_KEEPALIVE
 void I_InitJoystick(void)
 {
     int index;
@@ -358,6 +362,18 @@ static int GetAxisState(int axis, int invert)
     }
 
     return result;
+}
+
+EMSCRIPTEN_KEEPALIVE
+void UpdateJoystick(int data1, int data2, int data3, int data4, int data5) {
+    event_t ev;
+    ev.type = ev_joystick;
+    ev.data1 = data1;
+    ev.data2 = data2;
+    ev.data3 = data3;
+    ev.data4 = data4;
+    ev.data5 = data5;
+    D_PostEvent(&ev);
 }
 
 void I_UpdateJoystick(void)

@@ -24,6 +24,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include <emscripten.h>
+#include <emscripten/html5.h>
+
 #include <time.h> // [crispy] time_t, time(), struct tm, localtime()
 
 #include "config.h"
@@ -571,6 +575,9 @@ void D_DoomLoop (void)
     // [crispy] no need to write a demo header in demo continue mode
     if (demorecording && gameaction != ga_playdemo)
 	G_BeginRecording ();
+
+    printf("Running emscripten_set_main_loop()\n");
+    emscripten_set_main_loop(D_RunFrame, 0, 0);
 
     main_loop_started = true;
 

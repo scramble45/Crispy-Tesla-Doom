@@ -16,7 +16,7 @@
 //
 
 
-
+#include <emscripten/websocket.h>
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
@@ -538,6 +538,17 @@ void G_BuildTiccmd (ticcmd_t* cmd, int maketic)
      || joystrafemove > 0)
     {
         side += sidemove[speed]; 
+    }
+
+    // fullscreen mode
+    if (gamekeydown[key_fullscreen]) {
+        EmscriptenFullscreenChangeEvent fsce;
+        emscripten_get_fullscreen_status(&fsce);
+        if (!fsce.isFullscreen) {
+            printf("doom, entering fullscreen");
+            emscripten_request_fullscreen("#canvas", 1);
+            emscripten_sleep(1000);
+        }
     }
 
     // [crispy] look up/down/center keys
