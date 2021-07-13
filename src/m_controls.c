@@ -209,21 +209,17 @@ int key_menu_reloadlevel = 0; // [crispy]
 // Joystick controls
 //
 
-int joybfire = 0;
+int joybnextweapon = 1;
+int joybprevweapon = 3;
+int joybautomap = 2;
+int joybfire = 7;
 int joybstrafe = 1;
-int joybuse = 3;
-int joybspeed = 2;
-
+int joybuse = 0;
+int joybspeed = 6;
 int joybstrafeleft = -1;
 int joybstraferight = -1;
-
 int joybjump = -1;
-
-int joybprevweapon = -1;
-int joybnextweapon = -1;
-
-int joybmenu = -1;
-int joybautomap = -1;
+int joybmenu = 9;
 
 // Control whether if a mouse button is double clicked, it acts like 
 // "use" has been pressed
