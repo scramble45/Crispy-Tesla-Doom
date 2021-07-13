@@ -33,8 +33,8 @@ Once the game is running you can redirect via YouTube to go fullscreen by clicki
 
 ## TODO
 - Improve hires mode
-- Add music opl emulation
-- Improved gamepad controls / add additional bindings
+- Add music OPL emulation
+- Fix controller drift and button debounce or something like that
 
 ## Special Thanks
 - [Cloudflare][4] for getting the ball rolling, and giving me a better foot hold to get a Crispy port working.
