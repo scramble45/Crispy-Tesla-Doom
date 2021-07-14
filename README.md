@@ -37,7 +37,7 @@ Once the game is running you can redirect via YouTube to go fullscreen by clicki
 - Fix controller drift and button debounce or something like that
 
 ## Special Thanks
-- [Cloudflare][4] for getting the ball rolling, and giving me a better foot hold to get a Crispy port working.
+- [Cloudflare][6] for getting the ball rolling, and giving me a better foot hold to get a Crispy port working.
 - [Emscripten][2] and there coherent documentation/toolchain.
 
 ## License
