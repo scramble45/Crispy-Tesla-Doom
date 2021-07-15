@@ -983,7 +983,7 @@ void P_SpawnMapThing (mapthing_t* mthing)
     // [crispy] warn about mapthings without any skill tag set
     if (!(mthing->options & (MTF_EASY|MTF_NORMAL|MTF_HARD)))
     {
-	fprintf(stderr, "P_SpawnMapThing: Mapthing type %i without any skill tag at (%i, %i)\n",
+	printf("P_SpawnMapThing: Mapthing type %i without any skill tag at (%i, %i)\n",
 	       mthing->type, mthing->x, mthing->y);
     }
 
@@ -1005,7 +1005,7 @@ void P_SpawnMapThing (mapthing_t* mthing)
     if (i==NUMMOBJTYPES)
     {
 	// [crispy] ignore unknown map things
-	fprintf (stderr, "P_SpawnMapThing: Unknown type %i at (%i, %i)\n",
+	printf("P_SpawnMapThing: Unknown type %i at (%i, %i)\n",
 		 mthing->type,
 		 mthing->x, mthing->y);
 	return;

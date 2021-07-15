@@ -79,7 +79,7 @@ mapformat_t P_CheckMapFormat (int lumpnum)
 	format |= MFMT_ZDBSPZ;
     }
     else
-	// fprintf(stderr, "BSP");
+	printf("BSP");
 
     if (nodes)
 	W_ReleaseLumpNum(b);

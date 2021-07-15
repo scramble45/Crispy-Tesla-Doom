@@ -257,7 +257,7 @@ void P_LoadSegs (int lump)
                 if (li->sidedef->midtexture)
                 {
                     li->backsector = 0;
-                    fprintf(stderr, "P_LoadSegs: Linedef %d has two-sided flag set, but no second sidedef\n", i);
+                    DEH_printf("P_LoadSegs: Linedef %d has two-sided flag set, but no second sidedef\n", i);
                 }
                 else
                 li->backsector = GetSectorAtNullAddress();
@@ -422,7 +422,7 @@ void P_LoadNodes (int lump)
     if (!data || !numnodes)
     {
 	if (numsubsectors == 1)
-	    fprintf(stderr, "P_LoadNodes: No nodes in map, but only one subsector.\n");
+	    DEH_printf("P_LoadNodes: No nodes in map, but only one subsector.\n");
 	else
 	    I_Error("P_LoadNodes: No nodes in map!");
     }
@@ -561,7 +561,7 @@ void P_LoadLineDefs (int lump)
 	// [crispy] warn about unknown linedef types
 	if ((unsigned short) ld->special > 141 && ld->special != 271 && ld->special != 272)
 	{
-	    fprintf(stderr, "P_LoadLineDefs: Unknown special %d at line %d.\n", ld->special, i);
+	    DEH_printf("P_LoadLineDefs: Unknown special %d at line %d.\n", ld->special, i);
 	    warn++;
 	}
 	ld->tag = SHORT(mld->tag);
@@ -590,7 +590,7 @@ void P_LoadLineDefs (int lump)
 		case 124:	// w1 Secret exit
 		    break;
 		default:
-		    fprintf(stderr, "P_LoadLineDefs: Special linedef %d without tag.\n", i);
+		    DEH_printf("P_LoadLineDefs: Special linedef %d without tag.\n", i);
 		    warn2++;
 		    break;
 	    }
@@ -645,7 +645,7 @@ void P_LoadLineDefs (int lump)
 	if (ld->sidenum[0] == NO_INDEX)
 	{
 	    ld->sidenum[0] = 0;
-	    fprintf(stderr, "P_LoadLineDefs: linedef %d without first sidedef!\n", i);
+	    DEH_printf("P_LoadLineDefs: linedef %d without first sidedef!\n", i);
 	}
 
 	if (ld->sidenum[0] != NO_INDEX) // [crispy] extended nodes
@@ -662,16 +662,16 @@ void P_LoadLineDefs (int lump)
     // [crispy] warn about unknown linedef types
     if (warn)
     {
-	fprintf(stderr, "P_LoadLineDefs: Found %d line%s with unknown linedef type.\n", warn, (warn > 1) ? "s" : "");
+	DEH_printf("P_LoadLineDefs: Found %d line%s with unknown linedef type.\n", warn, (warn > 1) ? "s" : "");
     }
     // [crispy] warn about special linedefs without tag
     if (warn2)
     {
-	fprintf(stderr, "P_LoadLineDefs: Found %d special linedef%s without tag.\n", warn2, (warn2 > 1) ? "s" : "");
+	DEH_printf("P_LoadLineDefs: Found %d special linedef%s without tag.\n", warn2, (warn2 > 1) ? "s" : "");
     }
     if (warn || warn2)
     {
-	fprintf(stderr, "THIS MAP MAY NOT WORK AS EXPECTED!\n");
+	DEH_printf("THIS MAP MAY NOT WORK AS EXPECTED!\n");
     }
 
     W_ReleaseLumpNum(lump);
@@ -766,7 +766,7 @@ boolean P_LoadBlockMap (int lump)
     memset(blocklinks, 0, count);
 
     // [crispy] (re-)create BLOCKMAP if necessary
-    fprintf(stderr, ")\n");
+    DEH_printf(")\n");
     return true;
 }
 
@@ -981,7 +981,7 @@ static void PadRejectArray(byte *array, unsigned int len)
 
     if (len > sizeof(rejectpad))
     {
-        fprintf(stderr, "PadRejectArray: REJECT lump too short to pad! (%u > %i)\n",
+        DEH_printf("PadRejectArray: REJECT lump too short to pad! (%u > %i)\n",
                         len, (int) sizeof(rejectpad));
 
         // Pad remaining space with 0 (or 0xff, if specified on command line).
@@ -1208,11 +1208,11 @@ P_SetupLevel
 	    nomonsters ? " -nomonsters" : "",
 	    NULL);
 
-	// fprintf(stderr, "P_SetupLevel: %s (%s) %s%s %d:%02d:%02d/%d:%02d:%02d ",
-	//     maplumpinfo->name, W_WadNameForLump(maplumpinfo),
-	//     skilltable[BETWEEN(0,5,(int) skill+1)], rfn_str,
-	//     ltime/3600, (ltime%3600)/60, ltime%60,
-	//     ttime/3600, (ttime%3600)/60, ttime%60);
+	DEH_printf("P_SetupLevel: %s (%s) %s%s %d:%02d:%02d/%d:%02d:%02d ",
+	    maplumpinfo->name, W_WadNameForLump(maplumpinfo),
+	    skilltable[BETWEEN(0,5,(int) skill+1)], rfn_str,
+	    ltime/3600, (ltime%3600)/60, ltime%60,
+	    ttime/3600, (ttime%3600)/60, ttime%60);
 
 	free(rfn_str);
     }

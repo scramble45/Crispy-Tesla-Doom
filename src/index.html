@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta property="title" content="Crispy Tesla DOOM">
   <meta http-equiv="Content-Security-Policy" content="frame-src 'self' *.crispy-tesla-doom.pages.dev;">
-  <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
   <title>Crispy Tesla DOOM</title>
   <style>
 
@@ -17,14 +17,15 @@
       min-height: 100vh;
       background: black;
       font-size: 120%;
-      font-family: 'Anton', sans-serif;
+      font-family: 'Orbitron', sans-serif;
       color: white;
-      image-rendering: pixelated;
       scrollbar-width: none;
     }
+
     ::-webkit-scrollbar {
       display: none;
     }
+
     #container {
       position: fixed;
       display: flex;
@@ -90,6 +91,15 @@
       color: hsl(0, 0%, 100%);
     }
 
+    #gamepad {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -100px 0 0 -150px;
+      color: hsl(0, 0%, 100%);
+      opacity: 0.5;
+    }
+
     @-webkit-keyframes rotation {
       from {
         -webkit-transform: rotate(0deg);
@@ -141,19 +151,40 @@
     </div>
   </div>
 
+  <div id="gamepad">No Gamepad Detected</div>
+
   <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1></canvas>
   <script type="text/javascript">
     const statusElement = document.getElementById('status');
     const progressElement = document.getElementById('progress');
     const spinnerElement = document.getElementById('spinner');
+    const gamepadElement = document.getElementById("gamepad");
+    const canvasElement = document.getElementById('canvas');
 
+    // save listener
     document.addEventListener('G_SaveGame', (e) => {
       console.log(e.detail)
     });
 
-    document.addEventListener('mousedown', e => {
-      location.href = `https://www.youtube.com/redirect?q=${window.location.href}`;
-    });
+    // check for tesla user-agent
+    if (navigator.userAgent.indexOf("Tesla") !== -1){
+      window.addEventListener("gamepadconnected", (e) => {
+        console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.", e.gamepad.index, e.gamepad.id, e.gamepad.buttons.length, e.gamepad.axes.length);
+        gamepadElement.style.display = "none";
+      });
+
+      document.addEventListener('mousedown', e => {
+        location.href = `https://www.youtube.com/redirect?q=${window.location.href}`;
+      });
+    } else {
+      // if not a Tesla increase vertical height
+      canvasElement.style.height = '100vh';
+    }
+
+    // general timeout for gamepad being connected or not
+    setTimeout(function(){
+      gamepadElement.style.display = "none";
+    }, 60000);
 
     const commonArgs = ["-iwad", "doom1.wad", "-window", "-nogui", "-nomusic", "-config", "default.cfg"];
 
