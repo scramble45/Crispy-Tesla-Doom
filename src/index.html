@@ -259,8 +259,7 @@
                   }
                 }
 
-                if (gamepad.axes[0] < -0.1
-                  || gamepad.axes[0] > 0.1) {
+                if (gamepad.axes[0] < -0.1 || gamepad.axes[0] > 0.1) {
                   currentState.strafe = gamepad.axes[0] < 0 ? -32767 : 32767
                 } else {
                   currentState.strafe = 0
