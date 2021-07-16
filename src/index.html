@@ -228,8 +228,9 @@
           currentState.look = 0
 
           const gamepads = navigator.getGamepads()
-          for (let index = 0; index < gamepads.length; index++) {
-            const gamepad = gamepads[index]
+          for (let i = 0; i < gamepads.length; i++) {
+            const gamepad = gamepads[i]
+
             if (gamepad) {
               gamepadElement.style.display = "none";
               const buttonLength = Math.min(20, gamepad.buttons.length)
@@ -240,27 +241,20 @@
                 }
               }
 
-              if (gamepad.axes[0] < -0.1
-                || gamepad.axes[0] > 0.1) {
-                currentState.strafe = gamepad.axes[0] < 0 ? -32767 : 32767
-              } else {
-                currentState.strafe = 0
-              }
-
-              if (gamepad.axes[1] < -0.1
-                || gamepad.axes[1] > 0.1) {
+              if (gamepad.axes[1] < -0.1 || gamepad.axes[1] > 0.1) {
                 currentState.y = gamepad.axes[1] < 0 ? -32767 : 32767
               } else {
                 currentState.y = 0
               }
 
-              if (gamepad.axes[2] < -0.1
-                || gamepad.axes[2] > 0.1) {
+              if (gamepad.axes[2] < -0.1 || gamepad.axes[2] > 0.1) {
                 currentState.x = gamepad.axes[2] < 0 ? -32767 : 32767
               } else {
                 currentState.x = 0
               }
             }
+
+
           }
 
           Module._UpdateJoystick(currentState.buttons, currentState.x, currentState.y, currentState.strafe, currentState.look)
