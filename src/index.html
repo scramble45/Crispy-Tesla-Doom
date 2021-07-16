@@ -6,6 +6,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta property="title" content="Crispy Tesla DOOM">
   <meta http-equiv="Content-Security-Policy" content="frame-src 'self' *.crispy-tesla-doom.pages.dev;">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
   <title>Crispy Tesla DOOM</title>
   <style>
@@ -236,9 +239,27 @@
               const buttonLength = Math.min(20, gamepad.buttons.length)
               for (let i = 0; i < buttonLength; i++) {
                 const button = gamepad.buttons[i]
+
+                if (gamepad.buttons[7].pressed){
+                  console.log('pressed fire')
+                  gamepad.vibrationActuator.playEffect('dual-rumble', {
+                    startDelay: 0, // Add a delay in milliseconds
+                    duration: 200, // Total duration in milliseconds
+                    weakMagnitude: 0.5, // intensity (0-1) of the small ERM 
+                    strongMagnitude: 0 // intesity (0-1) of the bigger ERM
+                  });
+                }
+
                 if (button.pressed) {
                   currentState.buttons |= (1 << i)
                 }
+              }
+
+              if (gamepad.axes[0] < -0.1
+                || gamepad.axes[0] > 0.1) {
+                currentState.strafe = gamepad.axes[0] < 0 ? -32767 : 32767
+              } else {
+                currentState.strafe = 0
               }
 
               if (gamepad.axes[1] < -0.1 || gamepad.axes[1] > 0.1) {
@@ -253,8 +274,6 @@
                 currentState.x = 0
               }
             }
-
-
           }
 
           Module._UpdateJoystick(currentState.buttons, currentState.x, currentState.y, currentState.strafe, currentState.look)
