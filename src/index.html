@@ -220,13 +220,6 @@
         }
 
         function frame() {
-        // DeadZone values from:
-        // http://msdn.microsoft.com/en-us/library/windows/desktop/ee417001(v=vs.85).aspx
-        // Left Stick: 8689/32767.0
-        // Right Stick: 7849.0/32767.0
-        // Shoulder0: 0.5
-        // Shoulder1: 30.0/255.0
-
           previousState.buttons = currentState.buttons
           previousState.x = currentState.x
           previousState.y = currentState.y
@@ -267,19 +260,19 @@
               }
 
               if (gamepad.axes[0] < -0.1 || gamepad.axes[0] > 0.1) {
-                currentState.strafe = gamepad.axes[0] < 0 ? -32767 : 32767
+                currentState.strafe = gamepad.axes[0] < 0 ? -32768 : 32767
               } else {
                 currentState.strafe = 0
               }
 
               if (gamepad.axes[1] < -0.1 || gamepad.axes[1] > 0.1) {
-                currentState.y = gamepad.axes[1] < 0 ? -32767 : 32767
+                currentState.y = gamepad.axes[1] < 0 ? -32768 : 32767
               } else {
                 currentState.y = 0
               }
 
               if (gamepad.axes[2] < -0.1 || gamepad.axes[2] > 0.1) {
-                currentState.x = gamepad.axes[2] < 0 ? -32767 : 32767
+                currentState.x = gamepad.axes[2] < 0 ? -32768 : 32767
               } else {
                 currentState.x = 0
               }
