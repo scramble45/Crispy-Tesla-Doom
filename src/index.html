@@ -201,6 +201,8 @@
       postRun: [],
       noInitialRun: true,
       onRuntimeInitialized: function () {
+        callMain(commonArgs);
+
         let frameID = undefined
 
         const currentState = {
@@ -290,7 +292,6 @@
         }
 
         frameID = window.requestAnimationFrame(frame)
-        callMain(commonArgs);
       },
       print: (function () {
         const element = document.getElementById('output');
