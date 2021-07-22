@@ -191,14 +191,31 @@
       gamepadElement.style.display = "none";
     }, 30000);
 
-    const commonArgs = ["-iwad", "doom1.wad", "-window", "-nogui", "-nomusic", "-config", "default.cfg"];
+    const commonArgs = ["-iwad", "doom1.wad", "-window", "-nogui", "-extraconfig", "crispy-doom.cfg"];
 
     var Module = {
       preRun: () => {
+        Module.FS.mkdir('/music-packs');
+        Module.FS.createPreloadedFile("", "music-packs/doom1music.cfg", "music-packs/doom1music.cfg", true, true);
+        Module.FS.createPreloadedFile("", "music-packs/d_e1m1.ogg", "music-packs/d_e1m1.ogg", true, true);
+        Module.FS.createPreloadedFile("", "music-packs/d_e1m2.ogg", "music-packs/d_e1m2.ogg", true, true);
+        Module.FS.createPreloadedFile("", "music-packs/d_e1m3.ogg", "music-packs/d_e1m3.ogg", true, true);
+        Module.FS.createPreloadedFile("", "music-packs/d_e1m4.ogg", "music-packs/d_e1m4.ogg", true, true);
+        Module.FS.createPreloadedFile("", "music-packs/d_e1m5.ogg", "music-packs/d_e1m5.ogg", true, true);
+        Module.FS.createPreloadedFile("", "music-packs/d_e1m6.ogg", "music-packs/d_e1m6.ogg", true, true);
+        Module.FS.createPreloadedFile("", "music-packs/d_e1m7.ogg", "music-packs/d_e1m7.ogg", true, true);
+        Module.FS.createPreloadedFile("", "music-packs/d_e1m8.ogg", "music-packs/d_e1m8.ogg", true, true);
+        Module.FS.createPreloadedFile("", "music-packs/d_e1m9.ogg", "music-packs/d_e1m9.ogg", true, true);
+        Module.FS.createPreloadedFile("", "music-packs/d_inter.ogg", "music-packs/d_inter.ogg", true, true);
+        Module.FS.createPreloadedFile("", "music-packs/d_intro.ogg", "music-packs/d_intro.ogg", true, true);
+        Module.FS.createPreloadedFile("", "music-packs/d_victor.ogg", "music-packs/d_victor.ogg", true, true);
         Module.FS.createPreloadedFile("", "doom1.wad", "doom1.wad", true, true);
+        Module.FS.createPreloadedFile("", "crispy-doom.cfg", "crispy-doom.cfg", true, true);
         Module.FS.createPreloadedFile("", "default.cfg", "default.cfg", true, true);
       },
-      postRun: [],
+      postRun: () => {
+        console.log('Finished')
+      },
       noInitialRun: true,
       onRuntimeInitialized: function () {
         callMain(commonArgs);

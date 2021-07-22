@@ -1543,7 +1543,7 @@ void D_DoomMain (void)
     {
         // Auto-detect the configuration dir.
 
-        M_SetConfigDir(NULL);
+        M_SetConfigDir("/");
     }
 
     //!

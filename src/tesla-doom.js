@@ -1193,7 +1193,7 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 564704: function($0) {
+ 564720: function($0) {
   var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
   var reply = window.prompt(str, "i");
   if (reply === null) {
@@ -1201,10 +1201,10 @@ var ASM_CONSTS = {
   }
   return allocate(intArrayFromString(reply), "i8", ALLOC_NORMAL);
  },
- 564929: function($0, $1) {
+ 564945: function($0, $1) {
   alert(UTF8ToString($0) + "\n\n" + UTF8ToString($1));
  },
- 564986: function($0, $1, $2) {
+ 565002: function($0, $1, $2) {
   var w = $0;
   var h = $1;
   var pixels = $2;
@@ -1275,7 +1275,7 @@ var ASM_CONSTS = {
   SDL2.ctx.putImageData(SDL2.image, 0, 0);
   return 0;
  },
- 566441: function($0, $1, $2, $3, $4) {
+ 566457: function($0, $1, $2, $3, $4) {
   var w = $0;
   var h = $1;
   var hot_x = $2;
@@ -1312,36 +1312,36 @@ var ASM_CONSTS = {
   stringToUTF8(url, urlBuf, url.length + 1);
   return urlBuf;
  },
- 567430: function($0) {
+ 567446: function($0) {
   if (Module["canvas"]) {
    Module["canvas"].style["cursor"] = UTF8ToString($0);
   }
   return 0;
  },
- 567523: function() {
+ 567539: function() {
   if (Module["canvas"]) {
    Module["canvas"].style["cursor"] = "none";
   }
  },
- 567592: function() {
+ 567608: function() {
   return screen.width;
  },
- 567617: function() {
+ 567633: function() {
   return screen.height;
  },
- 567643: function() {
+ 567659: function() {
   return window.innerWidth;
  },
- 567673: function() {
+ 567689: function() {
   return window.innerHeight;
  },
- 567704: function($0) {
+ 567720: function($0) {
   if (typeof setWindowTitle !== "undefined") {
    setWindowTitle(UTF8ToString($0));
   }
   return 0;
  },
- 567799: function() {
+ 567815: function() {
   if (typeof AudioContext !== "undefined") {
    return 1;
   } else if (typeof webkitAudioContext !== "undefined") {
@@ -1349,7 +1349,7 @@ var ASM_CONSTS = {
   }
   return 0;
  },
- 567936: function() {
+ 567952: function() {
   if (typeof navigator.mediaDevices !== "undefined" && typeof navigator.mediaDevices.getUserMedia !== "undefined") {
    return 1;
   } else if (typeof navigator.webkitGetUserMedia !== "undefined") {
@@ -1357,7 +1357,7 @@ var ASM_CONSTS = {
   }
   return 0;
  },
- 568160: function($0) {
+ 568176: function($0) {
   if (typeof Module["SDL2"] === "undefined") {
    Module["SDL2"] = {};
   }
@@ -1379,11 +1379,11 @@ var ASM_CONSTS = {
   }
   return SDL2.audioContext === undefined ? -1 : 0;
  },
- 568653: function() {
+ 568669: function() {
   var SDL2 = Module["SDL2"];
   return SDL2.audioContext.sampleRate;
  },
- 568721: function($0, $1, $2, $3) {
+ 568737: function($0, $1, $2, $3) {
   var SDL2 = Module["SDL2"];
   var have_microphone = function(stream) {
    if (SDL2.capture.silenceTimer !== undefined) {
@@ -1424,7 +1424,7 @@ var ASM_CONSTS = {
    }, have_microphone, no_microphone);
   }
  },
- 570373: function($0, $1, $2, $3) {
+ 570389: function($0, $1, $2, $3) {
   var SDL2 = Module["SDL2"];
   SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
   SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -1436,7 +1436,7 @@ var ASM_CONSTS = {
   };
   SDL2.audio.scriptProcessorNode["connect"](SDL2.audioContext["destination"]);
  },
- 570783: function($0, $1) {
+ 570799: function($0, $1) {
   var SDL2 = Module["SDL2"];
   var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
   for (var c = 0; c < numChannels; ++c) {
@@ -1455,7 +1455,7 @@ var ASM_CONSTS = {
    }
   }
  },
- 571388: function($0, $1) {
+ 571404: function($0, $1) {
   var SDL2 = Module["SDL2"];
   var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
   for (var c = 0; c < numChannels; ++c) {
@@ -1468,7 +1468,7 @@ var ASM_CONSTS = {
    }
   }
  },
- 571868: function($0) {
+ 571884: function($0) {
   var SDL2 = Module["SDL2"];
   if ($0) {
    if (SDL2.capture.silenceTimer !== undefined) {
@@ -10003,6 +10003,10 @@ var dynCall_iid = Module["dynCall_iid"] = function() {
  return (dynCall_iid = Module["dynCall_iid"] = Module["asm"]["dynCall_iid"]).apply(null, arguments);
 };
 
+var dynCall_iiiiiiiii = Module["dynCall_iiiiiiiii"] = function() {
+ return (dynCall_iiiiiiiii = Module["dynCall_iiiiiiiii"] = Module["asm"]["dynCall_iiiiiiiii"]).apply(null, arguments);
+};
+
 var dynCall_jiji = Module["dynCall_jiji"] = function() {
  return (dynCall_jiji = Module["dynCall_jiji"] = Module["asm"]["dynCall_jiji"]).apply(null, arguments);
 };
@@ -10017,10 +10021,6 @@ var dynCall_iiiiiiiiii = Module["dynCall_iiiiiiiiii"] = function() {
 
 var dynCall_iiiiiidii = Module["dynCall_iiiiiidii"] = function() {
  return (dynCall_iiiiiidii = Module["dynCall_iiiiiidii"] = Module["asm"]["dynCall_iiiiiidii"]).apply(null, arguments);
-};
-
-var dynCall_iiiiiiiii = Module["dynCall_iiiiiiiii"] = function() {
- return (dynCall_iiiiiiiii = Module["dynCall_iiiiiiiii"] = Module["asm"]["dynCall_iiiiiiiii"]).apply(null, arguments);
 };
 
 var dynCall_viiiiiii = Module["dynCall_viiiiiii"] = function() {
